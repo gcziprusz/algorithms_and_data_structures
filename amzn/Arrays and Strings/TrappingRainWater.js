@@ -32,3 +32,33 @@ function bfRainTerraces(terraces) {
   return waterAmount;
 }
 console.log("bfRainTerraces",bfRainTerraces([0,1,0,2,1,0,1,3,2,1,2,1]) === 6 )
+
+// optimized save left max and right max values
+var trap = function(heights) {
+    var totalTrappedWater = 0;
+    var size = heights.length;
+    
+    var lm = new Array(size);
+    var rm = new Array(size);
+    
+    lm[0] = heights[0];
+    for(var i = 1;i < size;i++){
+        lm[i] = Math.max(heights[i],lm[i-1]);
+    }
+    // figure and store left max values
+    // figure and store right max values
+    rm[size-1] = heights[size-1];
+    for(var j = size -2;j >= 0;j--){
+        rm[j] = Math.max(heights[j],rm[j+1]);
+    }
+    
+    // zip over heights:
+    for(var c = 1;c < size-1;c++){
+        totalTrappedWater += Math.min(rm[c],lm[c]) - heights[c]
+    }
+        // figure ledge size 
+        // substract current height
+        // add up to totalTrappedWater +=
+    
+    return totalTrappedWater;
+};
