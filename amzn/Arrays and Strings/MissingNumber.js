@@ -3,8 +3,20 @@
 // console.log("missingNumber",missingNumber([1,1,1,1,1])); ???
 // console.log("missingNumber",missingNumber([0,0,0,0,0,0,0,0])); ???
 
-// Sorting solution
 
+// XOR fastest solution
+// resources
+// https://www.youtube.com/watch?v=Dq0jQX3YNKg
+// https://stackoverflow.com/questions/14279866/what-is-inverse-function-to-xor
+function missingNumber(nums) {
+  var missing = nums.length;
+      for(var i =0;i< nums.length;i++){
+          missing = missing ^ (i ^ nums[i]);
+      }
+      return missing;
+}
+
+// Sorting solution
 function missingNumber(nums) {
     var size = nums.length;
     //sort array
