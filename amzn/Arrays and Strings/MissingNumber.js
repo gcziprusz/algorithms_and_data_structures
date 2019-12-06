@@ -31,3 +31,20 @@ function missingNumber(nums) {
     }
     return -1;
 }
+
+
+
+// do it using a set 
+function missingNumber(nums) {
+    var sequenceSet = new Set();
+    for( n of nums){
+        sequenceSet.add(n);
+    }
+    var expSum = nums.length +1;
+    for(var i =0; i< expSum;i++){
+        if(!sequenceSet.has(i)){
+          return i;   
+        }
+    }
+    return -1;
+}
