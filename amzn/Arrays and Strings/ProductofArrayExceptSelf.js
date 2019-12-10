@@ -25,3 +25,28 @@ var productExceptSelf = function(nums) {
     }
     return result; 
 };
+
+
+/**
+ * CONSTANT SPACE SOLUTION BY REUSING ARRAY
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var productExceptSelf = function(nums) {
+    var len = nums.length;
+    
+    var result = new Array(len);
+    
+    //build a product array products of left of i
+    result[0] = 1;
+    for(var i = 1;i < len ;i++){
+        result[i] = nums[i-1]* result[i-1];
+    }
+    //build a product array products of right of i
+    R = 1;
+    for(var i = len - 1;i >= 0 ;i--){
+        result[i] = result[i] * R;
+        R *= nums[i]
+    }
+    return result; 
+};
