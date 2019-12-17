@@ -36,9 +36,13 @@
 //   [9,6,3]
 // ]
 
-const rotate = function(matrix){
-  matrix = matrix.reverse()
-  for(let i in matrix)
-    for(let j =0; j<i; j++) [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]]
-  return matrix
-}
+var rotate = function(matrix) {
+    matrix.reverse();
+    for(let rowIndex in matrix){
+       for(let columnIndex =0; columnIndex<rowIndex; columnIndex++){
+         [matrix[rowIndex][columnIndex], matrix[columnIndex][rowIndex]] 
+           = [matrix[columnIndex][rowIndex], matrix[rowIndex][columnIndex]]
+       } 
+    }
+    return matrix;
+};
