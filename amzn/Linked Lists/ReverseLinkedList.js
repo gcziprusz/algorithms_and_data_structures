@@ -11,21 +11,16 @@
  */
 function reverseList(head) {
     // track previous
-   let prev = null;
-    // track curr 
-    let curr = head; 
-    
-    while(curr !=null){
-    // 1 store next
-        let next = curr.next;
-    // 2 point curr to prev
-        curr.next = prev;
-    // 3 update prev to curr 
-        prev = curr;
-    // 4 update curr to next
-        curr = next;
+    let prev = null;
+    while(head!= null){
+        // 1 store next so we dont break the link with next step pointing back to previous
+        let tmpNext = head.next; 
+        // now we can point back 
+        head.next = prev;
+        // we can bump previous to current node 
+        prev = head;
+        // bump current to stred next
+        head = tmpNext;
     }
-    
     return prev;
-    
 }
