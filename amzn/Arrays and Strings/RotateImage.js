@@ -77,3 +77,12 @@ var rotate = function(matrix) {
     }
     return matrix;
 };
+
+Array.prototype.reverse = function(){
+    let len = this.length;
+    for(let l=0,r=len-1;l<r;r--,l++){
+        [this[r],this[l]]=[this[l],this[r]]
+    }
+    return this;
+}
+
