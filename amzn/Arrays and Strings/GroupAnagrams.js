@@ -14,3 +14,13 @@ var groupAnagrams = function(strs) {
     }
     return Object.values(h);
 };
+
+/* Use a Map and less operations */
+var groupAnagrams = function(strs) {
+    let grams = new Map();
+    for(s of strs){
+       let k = [...s].sort().join("");
+       grams.set(k, [...(grams.get(k)|| []),s]);
+    }
+    return [...grams.values()];
+};
