@@ -10,3 +10,18 @@ var mostCommonWord = function(paragraph, banned) {
     //Return the word with the highest count in the histogram
     return Object.keys(mp).reduce((a, b) => mp[a] > mp[b] ? a : b);
 };
+
+
+
+// Similar solution using a js Map
+var mostCommonWord = function(paragraph, banned) {
+    var h = new Map();
+    paragraph
+        .toLowerCase()
+        .split(/\W/)
+        .filter(w => w)
+        .forEach(w=> h.set(w,h.get(w) ? h.get(w)+1:1));
+    banned.map(w => h.set(w,-1));
+    return Array.from(h.keys())
+        .reduce((a,c) => h.get(a) > h.get(c) ? a:c);
+};
