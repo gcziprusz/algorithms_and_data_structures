@@ -17,3 +17,11 @@ const reorderLogFiles = (logs) => {
   }
   return [...letterLogs.sort(compare), ...digitLogs];
 };
+
+
+String.prototype.localeCompare = function(b)  {
+    if(this===b) {
+        return 0;
+    }
+    return this > b ? 1:-1;
+}
