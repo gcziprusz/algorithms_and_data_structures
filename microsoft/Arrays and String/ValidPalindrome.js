@@ -32,7 +32,7 @@ Code
  *
  */
 var isPalindrome = function(s) {
-  var cleaned = s.replace(/[^a-z0-9]/g, "");
+  var cleaned = s.replace(/[^a-zA-Z0-9]/g, "");
   var reversedAndCleaned = cleaned
     .split("")
     .reverse()
