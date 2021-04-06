@@ -65,3 +65,38 @@ function reverseKGroup(head, k) {
     }
     return tempHead.next;
 }
+
+
+/****alternative solution*******/
+var reverseKGroup = function(head, k) {
+  var dummy = new ListNode(0, head);
+  groupPrev = dummy;
+  while(true){
+    var kth = getKth(groupPrev,k);
+    if (kth === null){
+      break;
+    }
+    var groupNext = kth.next;
+    
+    var prev = kth.next,curr= groupPrev.next;
+    while(curr!= groupNext){
+      var tmp = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = tmp;
+    }
+    
+    var tmp2 = groupPrev.next;
+    groupPrev.next = kth;
+    groupPrev = tmp2;
+  }
+  return dummy.next;
+    
+};
+var getKth = function(curr,k){
+  while(curr!==null && k>0){
+    curr = curr.next;
+    k--;
+  }
+  return curr;
+}
