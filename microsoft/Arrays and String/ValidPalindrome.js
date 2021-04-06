@@ -152,7 +152,7 @@ var isPalindrome = function(s) {
 const isLetterOrDigit = function(ch) {
   // ^[a-zA-Z0-9_]
   // NOT letters or digits
-  const regexp = /[^a-z0-9]/;
+  const regexp = /[^a-z0-9]/i;
 
   return !regexp.test(ch);
 };
