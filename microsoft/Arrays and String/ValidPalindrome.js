@@ -32,7 +32,7 @@ Code
  *
  */
 var isPalindrome = function(s) {
-  var cleaned = s.replace(/\W/g, "");
+  var cleaned = s.replace(/[^a-z0-9]/g, "");
   var reversedAndCleaned = cleaned
     .split("")
     .reverse()
@@ -82,7 +82,7 @@ var isPalindrome = function(s) {
     return true;
   }
 
-  const regex = /\W/gm;
+  const regex = /[^a-z0-9]/gm;
   const cleaned = [...s.toLowerCase().replace(regex, "")];
 
   let i = 0;
@@ -152,7 +152,7 @@ var isPalindrome = function(s) {
 const isLetterOrDigit = function(ch) {
   // ^[a-zA-Z0-9_]
   // NOT letters or digits
-  const regexp = /\W/;
+  const regexp = /[^a-z0-9]/;
 
   return !regexp.test(ch);
 };
