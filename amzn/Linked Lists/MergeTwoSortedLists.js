@@ -66,7 +66,11 @@ function mergeTwoLists( l1,  l2) {
          l2 =l2.next;
      }
      res = res.next;
-}
-    res.next = l1===null? l2:l1;
+ }
+  // At least one of l1 and l2 can still have nodes at this point, so connect
+  // the non-null list to the end of the merged list.
+//   if(l1) res.next = l1;
+//   if(l2) res.next =l2;
+ res.next = l1===null? l2:l1;
  return head.next
 }
