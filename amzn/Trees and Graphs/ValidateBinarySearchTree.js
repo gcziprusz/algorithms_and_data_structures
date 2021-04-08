@@ -10,19 +10,17 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-  var helper = (node, lower, upper) => {
+  var valid = (node, lower, upper) => {
       if(node === null) return true;
       
       let val = node.val;
       
-      if(lower !== null && lower >= val) return false;
-      if(upper !== null && upper <= val) return false;
+      if(lower >= val || val >= upper) return false;
       
-      if (!helper(node.right, val, upper)) return false;
-      if (!helper(node.left, lower, val)) return false;
+      if (!valid(node.right, val, upper)) return false;
+      if (!valid(node.left, lower, val)) return false;
       
       return true;
   };
-    return helper(root, null,null);
-    
+  return valid(root, -Infinity, Infinity);  
 };
