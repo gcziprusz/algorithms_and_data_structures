@@ -17,9 +17,10 @@ var isValidBST = function(root) {
       
       if(lower >= val || val >= upper) return false;
       
+      // the next 3 lines can be a single line:
+      // return valid(node.left,min,val)&&valid(node.right,val,max);
       if (!valid(node.right, val, upper)) return false;
       if (!valid(node.left, lower, val)) return false;
-      
       return true;
   };
   return valid(root, -Infinity, Infinity);  
