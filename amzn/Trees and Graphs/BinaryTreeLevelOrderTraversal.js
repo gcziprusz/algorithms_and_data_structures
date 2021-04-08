@@ -60,3 +60,23 @@ var levelOrder = function(root) {
     }
     return levels;
 };
+
+/*** ALTERNATIVE ITERATIVE**/
+var levelOrder = function(root) {
+    var res =[];
+    var q =[];
+    q.push(root)
+    while(q.length>0){
+        var level =[];
+        var qlen = q.length;
+        for(var i=0;i< qlen;i++){
+            var n = q.shift();
+            if(n) {
+                level.push(n.val);
+                q.push(n.left,n.right);                
+            }
+        }
+        if(level.length > 0) res.push(level)
+    }
+    return res;
+};
