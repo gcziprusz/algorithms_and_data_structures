@@ -10,17 +10,17 @@
  * @return {boolean}
  */
 var isValidBST = function(root) {
-  var valid = (node, lower, upper) => {
+  var valid = (node, min, max) => {
       if(node === null) return true;
       
       let val = node.val;
       
-      if(lower >= val || val >= upper) return false;
+      if(min >= val || val >= max) return false;
       
       // the next 3 lines can be a single line:
       // return valid(node.left,min,val)&&valid(node.right,val,max);
-      if (!valid(node.right, val, upper)) return false;
-      if (!valid(node.left, lower, val)) return false;
+      if (!valid(node.right, val, max)) return false;
+      if (!valid(node.left, min, val)) return false;
       return true;
   };
   return valid(root, -Infinity, Infinity);  
