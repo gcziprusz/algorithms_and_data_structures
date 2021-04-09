@@ -110,3 +110,24 @@ var zigzagLevelOrder = function(root) {
     return result;
 }; 
 
+/******** DFS ALTERNATIVE WITHOUT A THIRD PARAM *******/
+var zigzagLevelOrder = function(root) {
+    var result =[];
+    var dfs = function(node,level){
+        if(!node) return;
+        
+        if(level >= result.length) result.push([]);
+        var ltr = level%2 === 0;
+        if(ltr) {   
+            result[level].push(node.val); 
+        }
+        else {
+            result[level].unshift(node.val);  
+        } 
+        
+        if(node.left) dfs(node.left,level+1);
+        if(node.right) dfs(node.right,level+1);
+    };
+    dfs(root,0);
+    return result;
+}
