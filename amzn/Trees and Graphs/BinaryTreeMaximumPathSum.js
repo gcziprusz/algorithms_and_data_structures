@@ -27,3 +27,20 @@ var maxPathSum = function(root) {
     maxGain(root);
     return max;
 };
+/***RECURSIVE NICE ALTERNATIVE**/
+var maxPathSum = function(root) {
+    var max = -Infinity;
+  
+    var helper =function(n){
+        if (!n) return 0;
+        
+        var lmax = helper(n.left);
+        var rmax = helper(n.right);
+        
+        max = Math.max(max,lmax+rmax+n.val);
+        return Math.max(n.val+lmax,n.val+rmax,0)
+    }; 
+    
+    helper(root);
+    return max;
+};
