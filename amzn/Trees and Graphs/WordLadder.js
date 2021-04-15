@@ -63,3 +63,42 @@ function ladderLength(beginWord,  endWord, wordList) {
 
     return 0;
   }
+
+
+/****VERY SIMILAR WITH A FANCY HELPER***/
+function ladderLength(beginWord,  endWord, wordList) {
+    var len = beginWord.length;
+    var maskDict = new Map();
+    wordList.forEach(w => {
+        for(var i=0;i<len;i++){
+            var mw = w.maskWord(i);
+            var matches = maskDict.get(mw) || [];
+            matches.push(w);
+            maskDict.set(mw,matches);
+        }
+    });
+    let q = [{w:beginWord,l:1}]; 
+    let v = new Map();
+    v.set(beginWord,true);
+    while(q.length!==0){
+       let n= q.shift();
+       for(let i=0;i<len;i++){
+            let maskedWord = n.w.maskWord(i);
+            let transforms = maskDict.get(maskedWord) || [];
+            for(transform of transforms){
+                if(transform === endWord){
+                   return n.l+1;
+                }
+                if(!v.has(transform)){
+                    q.push({w:transform,l:n.l+1})
+                    v.set(transform,true);
+                }
+            }
+       }
+    }
+    return 0;
+}
+
+String.prototype.maskWord = function(i) {
+    return this.substring(0,i)+"*"+this.substring(i+1,this.length);
+}
