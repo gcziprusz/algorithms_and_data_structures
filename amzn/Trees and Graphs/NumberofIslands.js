@@ -83,3 +83,52 @@ function color(grid, i, j) {
     }   
   }
 }
+
+
+
+
+
+/******SWITCHABLE BFS DFS **************/
+ /**
+  * @param {character[][]} grid
+  * @return {number}
+  */
+ var numIslands = function(grid) {
+     let islands = 0;
+     if (!grid) return islands ;
+     let rows = grid.length;
+     let cols= grid[0].length;
+     for(let cr=0;cr<rows;cr++) {
+         for(let cc =0;cc<cols;cc++){
+             if(grid[cr][cc]==='1'){
+                islands++;
+                //dfs(grid,cr,cc);
+                bfs(grid,cr,cc);
+             }
+         }
+     }
+     return islands;
+ }
+ function dfs(grid,r,c){
+     if(r<0||c<0||r>=grid.length||c>=grid[0].length||grid[r][c]==='0') return
+     grid[r][c] ='0'
+     
+     dfs(grid,r-1,c); // up
+     dfs(grid,r+1,c); // down
+     dfs(grid,r,c+1); // right
+     dfs(grid,r,c-1); // left
+ }
+
+ function bfs(grid,r,c){
+    let q =[[r,c]];
+    while(q.length){
+        let [cr,cc] = q.pop();
+        grid[cr][cc] = '0';
+        // u,d,l,r
+        for(let [nr,nc] of [[cr-1,cc],[cr+1,cc],[cr,cc-1],[cr,cc+1]]){
+           if(nr>=0&&nc>=0&&nr<grid.length&&nc<grid[0].length&&grid[nr][nc]==='1'){
+              q.push([nr,nc]);
+           }
+        }
+    }
+ }
