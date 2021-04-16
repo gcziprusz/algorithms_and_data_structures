@@ -69,7 +69,7 @@ function color(grid, i, j) {
   let q = [[i, j]];
   while (q.length) {
     let [x, y] = q.pop();
-    grid[x][y] = 0;
+    grid[x][y] = '0';
     for (let [newX, newY] of [[x + 1, y], [x, y + 1], [x - 1, y], [x, y - 1]]) {
       if (
         newX >= 0 &&
