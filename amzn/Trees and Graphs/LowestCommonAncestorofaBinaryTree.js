@@ -36,8 +36,8 @@ function lowestCommonAncestor(root, p, q) {
       let l = dfs(root.left,p,q);
       let r = dfs(root.right,p,q);
       let c = root === p || root === q;
-      if((l&&r)||(l&&c)|(r&&c)) res = root;
-      return l||r||c;
+      if((l&&r) || (l&&c) || (r&&c)) res = root;
+      return l || r || c;
     }
   
     let res;
