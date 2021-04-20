@@ -28,17 +28,20 @@ function lowestCommonAncestor(root, p, q) {
 
 
 
-let res;
+
 
 function lowestCommonAncestor(root, p, q) {
-    findLCA(root,p,q);
+    function dfs(root, p, q){
+      if (!root) return false;
+      let l = dfs(root.left,p,q);
+      let r = dfs(root.right,p,q);
+      let c = root === p || root === q;
+      if((l&&r)||(l&&c)|(r&&c)) res = root;
+      return l||r||c;
+    }
+  
+    let res;
+    dfs(root,p,q);
     return res;
 }
-function findLCA(root, p, q){
-    if (!root) return false;
-    let l = findLCA(root.left,p,q);
-    let r = findLCA(root.right,p,q);
-    let c = root === p || root === q;
-    if((l&&r)||(l&&c)|(r&&c)) res = root;
-    return l||r||c;
-}
+
