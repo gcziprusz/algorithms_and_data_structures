@@ -1,3 +1,38 @@
+/****EASY TO GROK *****/
+var letterCombinations = function(digits) {
+    let res = [];
+    let digitMap = new Map();
+    for(let [d,s] of [
+        ["2",["a","b","c"]],
+        ["3",["d","e","f"]],
+        ["4",["g","h","i"]],
+        ["5",["j","k","l"]],
+        ["6",["m","n","o"]],
+        ["7",["q","p","r","s"]],
+        ["8",["t","u","v"]],
+        ["9",["w","x","y","z"]]
+        ]) {
+        digitMap.set(d,s)
+    }
+
+    function gen(i, s){
+        if (s.length === digits.length) {
+            res.push(s)
+            return;
+        }
+        for(let c of digitMap.get(digits.charAt(i)) ){
+            gen(i+1,s+c)
+        }
+    }
+
+    if (digits) gen(0,"");
+
+    return res;
+};
+
+
+
+
 /**
  * @param {string} digits
  * @return {string[]}
