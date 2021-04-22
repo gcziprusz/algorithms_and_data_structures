@@ -43,3 +43,31 @@ var generateParenthesis = function(n) {
   dfs('', n, n);
   return output;
 };
+
+
+
+/*****ALTERNATIVE WITH GLOBAL STR ******/
+
+function generateParenthesis(n) {
+    let ans =[];
+    backtrack(ans, "", 0, 0, n);
+    return ans;
+  }
+
+  function backtrack( ans, cur, open, close, max) {
+  if (cur.length === max * 2) {
+    ans.push(cur);
+    return;
+  }
+
+  if (open < max) {
+    cur += "(";
+    backtrack(ans, cur, open + 1, close, max);
+    cur = cur.slice(0, -1);
+  }
+  if (close < open) {
+    cur += ")";
+    backtrack(ans, cur, open, close + 1, max);
+    cur = cur.slice(0,-1)
+  }
+}
