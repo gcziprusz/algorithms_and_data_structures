@@ -46,3 +46,25 @@ function findMedianSortedArrays(nums1, nums2) {
     ? nums[Math.floor(len / 2)]
     : (nums[len / 2 - 1] + nums[len / 2]) / 2);
 };
+
+/***alternative that may not meet big O requirement*/
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number}
+ */
+var findMedianSortedArrays = function(nums1, nums2) {
+    let nums = [].concat(nums1).concat(nums2);
+    nums = nums.sort(function(a, b) {
+        return a-b;
+    });
+    
+    const length = nums.length;
+    
+    if (length % 2 == 0) {
+        const index = Math.floor((length-1)/2);
+        return (nums[index] + nums[index+1])/2;
+    } else {
+        return nums[(length-1) / 2]
+    }
+};
