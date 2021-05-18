@@ -65,6 +65,46 @@ var findKthLargest = function(nums, k) {
     
     return minHeap.remove();
 };
+
+
+
+
+
+/***QUICK SELECT MY VERSION**/
+var findKthLargest = function(nums, k) {
+    return quickselect(nums,0,nums.length-1);
+
+    function quickselect(arr,start,end){
+        let mid = partitition(arr,start,end);
+        if(k < arr.length - mid){
+            return quickselect(nums,mid+1,end);
+        } else if(k > arr.length - mid){
+            return quickselect(nums,start,mid-1);       
+        }
+        return nums[mid];
+    };
+};
+var partitition = function(arr,start,end){
+    i = start;
+    j = start;
+    pivot = arr[end];
+    
+    for(let j = start;j<end;j++){
+        if(arr[j] <= arr[pivot]) {
+            swap(arr,i,pivot);
+            i++;
+        }
+    }
+    swap(i,pivot);
+    return i;
+};
+var swap = function(arr,i,j){
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+}
+
+
+
+
 /* quick select */
 /**
  * @param {number[]} nums
