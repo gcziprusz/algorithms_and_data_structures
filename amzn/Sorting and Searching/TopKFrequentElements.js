@@ -28,7 +28,7 @@ var topKFrequent = function(nums, k) {
 };
 
 
-/***ALTERNATIVE****/
+/***ALTERNATIVE less afficient with SORT operation ****/
 
 var topKFrequent = function(nums, k) {
   var result =[];
