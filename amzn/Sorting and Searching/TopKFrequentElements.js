@@ -1,4 +1,23 @@
 /*** MY SOL***/
+var topKFrequent = function(nums, k) {
+    let histo = new Map(); 
+    let occurences = [...new Array(nums.length+1)].map(()=> []);
+    nums.forEach(n => histo.set(n,(histo.get(n)||0)+1));
+   
+    histo.forEach((v,k) => occurences[v].push(k));
+    
+    let res =[];
+    for(let r = occurences.length-1;r>0;r--){
+        for(let f of occurences[r]){
+            res.push(f);
+            if(res.length === k) return res;
+        }
+    }
+};
+
+
+
+/**ALTERNATIVE MY SOLN*/
 /**
  * @param {number[]} nums
  * @param {number} k
