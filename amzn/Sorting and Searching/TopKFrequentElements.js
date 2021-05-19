@@ -1,3 +1,35 @@
+/*** MY SOL***/
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+var topKFrequent = function(nums, k) {
+    let count = new Map();
+    let freq = new Array(nums.length);
+    
+    for(let n of nums){
+        count.set(n,(count.get(n)||0)+1)
+    }
+    for(let [nm, fr] of count) {
+        if (freq[fr]) {
+            freq[fr].push(nm);
+        } else {
+           freq[fr] = [nm]; 
+        }
+    }
+    let res =[];
+    for(let i = freq.length-1;i>0;i--){
+        for (let j of (freq[i]||[])) {
+            res.push(j);
+            if (res.length === k) return res;
+        }
+    }
+};
+
+
+/***ALTERNATIVE****/
+
 var topKFrequent = function(nums, k) {
   var result =[];
   var frequencyMap = new Map();
