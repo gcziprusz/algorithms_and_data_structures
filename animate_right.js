@@ -27,14 +27,15 @@ the right over 2 seconds. Implement this function without using jQuery or any ot
 // animate(el, 2000, 300, 50);
 
 function animate(el,duration,distance){
-  let start = performance.now();
+  let start;
   let speed = distance / duration;
 
   function move(ctime){
+    if (!start) start = ctime; // will be set to the first tick 
      // figure out timeElapsed , break out
     let elapsed = ctime - start;
     if (elapsed > duration) return;
-    el.style.transform = `translateX(${elapsed*speed}px)`;
+    el.style.transform = `translateX(${Math.min(elapsed*speed,distance)}px)`;
     window.requestAnimationFrame(move);
   }
   window.requestAnimationFrame(move);
