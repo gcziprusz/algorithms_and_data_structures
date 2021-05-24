@@ -3,7 +3,7 @@
 class Store {
 	constructor() {
   	this.keys = [];
-    this.values = [];
+    	this.values = [];
   }
   
   set(node, value) {
@@ -25,11 +25,11 @@ class Store {
   }
   
   add(node, value) {
-		if (this.has(node)) {
-    	this.set(node, this.get(node) + value);
-    } else {
-    	this.set(node, value);
-    }
+	if (this.has(node)) {
+		this.set(node, this.get(node) + value);
+	} else {
+		this.set(node, value);
+	}
   }
   
   remove(node) {
@@ -37,7 +37,7 @@ class Store {
     
     if (index !== -1) {
     	this.keys.splice(index, 1);
-      this.values.splice(index, 1);
+	this.values.splice(index, 1);
     }
   }
   
