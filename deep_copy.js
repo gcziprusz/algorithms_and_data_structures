@@ -10,3 +10,24 @@ let deepCopy = function(destination, source) {
  }
  return destination;
 };
+
+
+/*MORE COMPLETE ALTERNATIVE*/
+const deepCopy = (obj,cloned = {}) => {
+  if (Array.isArray(obj)) {
+    cloned = [
+      ...obj
+    ];
+    for (let i = 0; i < obj.length; i++) {
+      deepCopy(obj[i], cloned[i]);
+    }
+  } else if (typeof obj === 'object') {
+    cloned = {
+      ...obj
+    };
+    for (const p of Object.keys(obj)) {
+      deepCopy(obj[p], cloned[p])
+    }
+  }
+  return cloned;
+}
