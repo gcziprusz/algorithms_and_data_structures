@@ -1,13 +1,24 @@
-const debounce = function(func, interval) {
+function debounce(fn,time){
   let timerId;
-  return function(e){
-    clearTimeout(timerId)
+  let dis = this;
+  return function(...args) {
+    clearTimeout(timerId);
     timerId = setTimeout(function(){
-      func.apply()
-    }, interval)
+      fn.call(dis,...args);
+    }
+    ,time);
   }
 }
-let debouncedAPICall = debounce(apiCall, 3000)
 
+function log(m){console.log("m",m)}
+let debouncedLogger = debounce(log,100);
 
-debouncedAPICall();
+debouncedLogger("1");
+setTimeout(function(){
+   debouncedLogger("2");
+     debouncedLogger("3");
+     debouncedLogger("4");
+}
+,200);
+debouncedLogger("5")
+
