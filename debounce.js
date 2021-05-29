@@ -7,4 +7,7 @@ const debounce = function(func, interval) {
     }, interval)
   }
 }
-debounce(apiCall, 3000)
+let debouncedAPICall = debounce(apiCall, 3000)
+
+
+debouncedAPICall();
