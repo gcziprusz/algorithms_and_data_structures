@@ -67,3 +67,20 @@ const node2 = document.getElementById('node2');
 const nodeX = getSymmetricNode(root1, root2, node1);
 
 console.log(nodeX === node2); // true
+
+
+// If we record the index of the el at each level we can use it to find els in the other tree
+
+// <HTML#r1>.childNodes v 
+// [<BODY>.parentNode ^] 
+// [<DIV>       <DIV>       <SPAN>      <TEXT>]
+// [<P><I>]     [<A#1><txt>]    [<txt>]       []
+
+
+// <HTML#r2>.childNodes v 
+// [<BODY>.parentNode ^] 
+// [<DIV>       <DIV>       <SPAN>      <TEXT>]
+// [<P><I>]     [<A#2><txt>]    [<txt>]     []  
+
+// [level_3_index,level_2_index,level_1_index,level_0_index];
+
