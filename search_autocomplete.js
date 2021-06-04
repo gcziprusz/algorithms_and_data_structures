@@ -1,3 +1,4 @@
+// codepen https://codepen.io/gcziprusz/pen/KKWojmv
 // Search Autocomplete
 // We start off with registering an event handler to both change and keyup event, where we pass the local value on the a method that queries the remote service.
 
