@@ -88,3 +88,116 @@
             resultsElement.innerHTML = html.join('');
         });
     }
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Autocomplete</title>
+    <!-- Included some basic styling, change at will -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/prampcontent/3ea04cbd0f61a798e96afbe5d31ec2f9/raw/e879e32222b543b29a168daa089e2f9f28cf9eb2/autocomplete.css">
+</head>
+<body>
+<form class="search-form">
+    <input type="text" class="search-input" placeholder="Start typing a movie title...">
+    <ul class="results"></ul>
+</form>
+<!-- Helper code to provide a search API for mock data -->
+<script src="https://cdn.rawgit.com/prampcontent/180077452f9279073cab1035f60d30cf/raw/9cbf891a80bad9ad09c6261ef9578a65502922cc/search_helper.js"></script>
+<script>
+    /*-------------------------------
+    *
+    * Write your JavaScript code here.
+    *
+    * The mocked search data is available using the searchData async method, e.g:
+    *   searchData("QUERY").then(results => ...)
+    * ------------------------------*/
+  
+    // listen to the key event 
+    // debounce that function 
+    //  call searchData (inputs) 
+    // ["",""]
+    //  for each in result create element li's 
+    //  append to .results
+   
+    let debouncedSearch = debounce(search,30);
+   
+    function debounce(fn, delay){
+      //a ab abc abcd      abcde
+      //^.......delay .... ^      
+      
+      let wait;
+   
+      let id = setTimeout(function(){
+        fn.apply(this,arguments);
+           clearTimeout(id);
+      },delay);
+    }
+  
+    let results = document.querySelector(".results");
+  
+    function search(inputString){
+       return searchData(inputString)
+         .then(processResult)
+         .catch(e => results.appendChild(document.createElement("li").innerText=`Data didnt load ${e}`));       
+    }
+    function processResult(results){
+      return results
+        .map(res => document.createElement("li").innerText=res)
+        .reduce(li=> results.appendChild(li));
+        // batch update DOM api 
+    }
+    
+  
+    document.addEventListener("keydown", debouncedSearch);
+</script>
+</body>
+</html>
+
+ // Get HTML elements
+    const searchInputElement = document.querySelector('.search-input');
+    const resultsElement = document.querySelector('.results');
+
+    // Convert search results into UI suggestions
+    function showSearchResults(searchQuery) {
+        searchData(searchQuery).then(results => {
+            const html = results.map(movie => `
+      <li>
+        <span class="title">${movie.title}</span>
+        <span class="rating">${movie.rating}</span>
+      </li>
+    `);
+
+            resultsElement.innerHTML = html.join('');
+        });
+    }
+
+    // Pass 
+    function handleChange() {
+        return showSearchResults(this.value);
+    }
+
+    // Register for both events
+    searchInputElement.addEventListener('change', handleChange);
+    searchInputElement.addEventListener('keyup', handleChange);
+ // Adding this right before the handleChange method
+    function memoize(func) {
+        const cache = new Map();
+        return function(...args) {
+            // Use first argument as key
+            const key = args[0];
+            if (cache.has(key)) {
+                console.log('cache hit');
+                return cache.get(key);
+            }
+            console.log('cache miss');
+            const val = func.apply(this, arguments);
+            cache.set(key, val);
+            return val;
+        };
+    }
+
+    // Apply the memoization to the search results method
+    showSearchResults = memoize(showSearchResults);
