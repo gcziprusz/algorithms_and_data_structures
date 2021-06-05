@@ -59,7 +59,10 @@ resetButton.addEventListener('click', function() {
   store.remove(countButton);
   countButton.innerText = 0;
 });
-
+<button id="count">0</button>
+<button id="reset">
+Reset
+</button>
 
 /*alternative using Map*/
 
