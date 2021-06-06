@@ -200,3 +200,33 @@ promise
   .catch(function(error){
     console.log(error)
   })
+
+
+
+/**ES5 ALTERNATIVE SIMPLE*/
+// ES5 alternative 
+function CodePenPromise(asyncAction){
+    this.state = "PENDING";
+    this.value = undefined;
+    this.thenActions = [];
+    this.catchActions = [];
+    asyncAction(this.resolve.bind(this),this.reject.bind(this));
+}
+CodePenPromise.prototype.resolve =  function(value){
+     this.state = "SUCCESS";
+     this.value = value;
+     this.thenActions.forEach(action => action(this.value));
+   }
+  CodePenPromise.prototype.reject = function(error){
+     this.state = "ERROR";
+     this.value = error;
+     this.catchActions.forEach(action => action(this.value));
+   }
+  CodePenPromise.prototype.then = function(action){
+    this.thenActions.push(action);
+     return this;
+   }
+  CodePenPromise.prototype.catch = function(action){
+      this.catchActions.push(action);
+      return this;
+   }
