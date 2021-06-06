@@ -1,8 +1,13 @@
-// What is dynamic programming ? Write a program to find the nth fibonacci number (1, 1, 2, 3, 5, 8 ….).
-// Very common question . Almost always asked . This is often your first chance to impress the interviewer with some Dynamic Programming swag .
+/* simple */
+const fibonacci = (n) => {  
+  if (n < 3) {
+    return n - 1;
+  }
+  return fibonacci(n - 1) + fibonacci(n - 2);
+};
 
-// As Js Safe number range is between 2^-53 to 2⁵³. 
-// Fibonacci beyond 85 will give errorneous result
+
+
 var fibo = function(computed, number) {
 if (number < 3) {
  return 1;
