@@ -1,5 +1,5 @@
 
-export function flatMap(array, callback) {
+function flatMap(array, callback) {
   return flat(map(array, callback));
 }
 
