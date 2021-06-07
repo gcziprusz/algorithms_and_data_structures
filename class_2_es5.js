@@ -29,7 +29,8 @@ function Children(){
   Parent.apply(this, arguments);
 }
 
-Children.prototype = new Parent();
+// Children.prototype = new Parent(); constructor is called twice , once with no arguments 
+Children.prototype = Object.create(Parent.prototype);
 
 var child = new Children("babe");
 console.log("ES7 children class",child.getName());
