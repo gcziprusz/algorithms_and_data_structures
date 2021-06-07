@@ -11,3 +11,8 @@ function every(array, callback) {
 
   return true;
 }
+
+let a = [7,7,3,1,11,9];
+console.log('every!!!!!', every(a, function(e){return e%2;}));
+
+
