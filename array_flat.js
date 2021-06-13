@@ -21,6 +21,17 @@ console.log(JSON.stringify([1,2,3,4])=== JSON.stringify(flatten([[1],2,3,[[[4]]]
 console.log(JSON.stringify([])=== JSON.stringify(flatten([[[[]]]])));
 
 
+/**
+ * recursive with depth gause
+ * @param { Array } arr
+ * @param { number } depth
+ */
+function flat(arr, depth = 1) {
+  return depth ? 
+    arr.reduce((acc, curr) => {
+      return [...acc, ...(Array.isArray(curr) ? flat(curr, depth - 1) : [curr])]
+    }, []) : arr;
+}
 
 /**functional alternative/
 /**
