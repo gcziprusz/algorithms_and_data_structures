@@ -6,6 +6,19 @@
 // Layout
 // We’ll use nested div elements to represent the clock, it’s face, and the various hands:
 
+      //           360deg
+      //             12
+      //          11 |  1   30deg
+      //         10  |   2  60deg
+      // 270deg 9 <<<|--- 3  90deg
+      //         8       4  120deg
+      //           7   5  150deg
+      //             6 
+      //           180deg     
+      // 12:15:45 
+
+
+
 <div class="clock">
     <div class="clock-face">
         <div class="hand hours"></div>
@@ -78,7 +91,10 @@
         
         // calc the rotation of each clock hand in degrees
         const secondsRotationDegrees = (seconds / 60) * 360;
+        
+        // 6 every minute tick represents 6deg rotation 1 hour rotation is   30deg/ 60/12
         const minutesRotationDegrees = (minutes / 60) * 360 + (seconds/60)*6;
+        // *30 bc 1 hour is a 30deg rotation, 
         const hoursRotationDegrees = (hours / 12) * 360 + (minutes/60)*30;
 
         setRotation(secondsElement, secondsRotationDegrees);
