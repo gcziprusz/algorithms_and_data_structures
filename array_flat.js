@@ -1,3 +1,4 @@
+/** recursive */
 function flatten(arr){
   let flatRes = [];
   if (!Array.isArray(arr)) return flat;
@@ -59,3 +60,42 @@ function flatten(arr) {
 
 flatten([1,[2,[3]],[4]]); // => [1,2,3,4]
 
+
+/**
+ * @param { Array } arr
+ * @param { number } depth
+ * Iterative solution alternative 
+ */
+function flat(arr, depth = 1) {
+  const stack = arr.map(item => [item, depth])
+  const res = []
+  
+  while (stack.length > 0) {
+    const [item, itemDepth] = stack.pop()
+    if (Array.isArray(item) && itemDepth > 0) {
+      stack.push(...item.map(i => [i, itemDepth - 1]))
+    } else {
+      res.push(item)
+    }
+  }
+  
+  return res.reverse()
+}
+
+/* USING GENERATORS 
+**
+ * @param {Array} arr
+ * @param {number} depth
+ */
+function flat(arr, depth = 1) {
+  function* flt(arr, d) {
+    for (const item of arr) {
+      if (Array.isArray(item) && d >0) {
+        yield* flt(item, d-1);
+      } else {
+        yield item;
+      }
+    }    
+  }
+  return [...flt(arr, depth)];
+}
