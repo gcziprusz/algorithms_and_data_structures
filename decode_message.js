@@ -40,3 +40,39 @@ function decode(message) {
   }
   return result
 }
+
+
+
+/** ALTERNATIVE ***/
+const a = [
+	['I', 'B', 'C', 'A', 'K', 'L', 'A'],
+  ['D', 'R', 'F', 'C', 'A', 'E', 'A'],
+  ['G', 'H', 'O', 'E', 'L', 'A', 'D'],
+];
+
+const UP = 1;
+const DOWN = -1;
+
+function print(a) {
+	const result = [];
+	const rows = a.length;
+  const cols = a[0].length;
+  let dir = DOWN;
+  let row = 0;
+  
+  for (let col = 0; col < cols; col++) {
+  	result.push(a[row][col]);
+    
+    if (dir === DOWN) {
+    	row++;
+      dir = (row === rows - 1 ? UP : DOWN);
+    } else {
+    	row--;
+      dir = (row === 0 ? DOWN : UP);
+    }
+  }
+  
+  return result.join('');
+}
+
+console.log(print(a));
