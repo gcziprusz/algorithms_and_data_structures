@@ -37,6 +37,23 @@ const clumsysquare = memoize((num) => {
   return result;
 });
 
+/* memoize with custom resolver */
+function memo(func, resolver = (...args) => args.join('_')) {
+  // your code here
+  let memo = new Map();
+  return function (...args) {
+    let k =  resolver(...args)
+    
+    if(!memo.has(k)) {
+      memo.set(k,func.apply(this,args))
+    } 
+    return memo.get(k);
+  }
+}
+
+
+
+
 console.time("First call");
 console.log(clumsysquare(9467));
 console.timeEnd("First call");
