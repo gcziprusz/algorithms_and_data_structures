@@ -1,43 +1,51 @@
-/**
- * @param { any } data
- * @param { Object } command
- */
-const keyMap = ["$push", "$set", "$merge", "$apply"];
-function update(data, command) {
-  return walk(data, command);
+const isObject = (data) => {
+  return typeof data === 'object' && data !== null
 }
+/**
+ * @param {any} data
+ * @param {Object} command
+ */
+function update(data, command) {
+  // for simple cases, which $command is in the first layer
+  if ('$push' in command) {
+    if (!Array.isArray(data)) {
+      throw new Error('not array')
+    }
 
-function walk(data, command, pdata, commandkey) {
-  // your code here
-  for (let k in command) {
-    if (keyMap.indexOf(k) !== -1) {
-      switch (k) {
-        case "$push":
-          if (data instanceof Array) {
-            data.push(...command[k]);
-          } else {
-            throw Error("no array");
-          }
-          break;
-        case "$set":
-          pdata[commandkey] = command[k];
-          break;
-        case "$merge":
-          if (data instanceof Object) {
-            pdata[commandkey] = Object.assign(data, command[k]);
-          } else {
-            throw Error("no Object");
-          }
-          break;
-        case "$apply":
-          pdata[commandkey] = command[k].call(null, pdata[commandkey]);
-          break;
-      }
-    } else {
-      if (command[k]) {
-        walk(data[k], command[k], data, k);
-      }
+    return [...data, ...command['$push']]
+  }
+
+  if ('$merge' in command) {
+    if (!isObject(data)) {
+      throw new Error('not object for $merge')
+    }
+
+    return {
+      ...data,
+      ...command['$merge']
     }
   }
-  return data;
+
+  if ('$apply' in command) {
+    return command['$apply'](data)
+  }
+
+  if ('$set' in command) {
+    return command['$set']
+  }
+
+  // for cases with path
+
+  // first shallow copy
+  if (!isObject(data)) {
+    throw new Error('not object for complex data')
+  }
+
+  const newData = Array.isArray(data) ? [...data] : {...data}
+
+  for (const key of Object.keys(command)) {
+    newData[key] = update(newData[key], command[key])
+  }
+
+  return newData
 }
