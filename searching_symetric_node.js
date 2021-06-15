@@ -106,3 +106,15 @@ const findCorrespondingNode = (rootA, rootB, target) => {
 }
 
 
+/** recursive option **/
+const findCorrespondingNode = (rootA, rootB, target) => {
+  if(rootA === target) {
+    return rootB;
+  }
+  for (let i = 0; i < rootA.children.length; i++) {
+    const foundNode = findCorrespondingNode(rootA.children[i], rootB.children[i], target);
+    if(foundNode) return foundNode;
+  }
+}
+
+
