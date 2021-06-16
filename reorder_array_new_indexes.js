@@ -24,3 +24,19 @@ function sort(items, newOrder) {
     i++;
   }
 }
+
+/*SINGLE LOOP O(1) space with swap helper*/
+function sort(items, newOrder) {
+  let i=0;
+  while(i<items.length){
+    if(i !== newOrder[i]){
+      let j = newOrder[i];
+      swap(items,i,j)
+      swap(newOrder,i,j)
+    }
+    i++;
+  }
+  function swap(arr,a,b){
+    [arr[a],arr[b]]=[arr[b],arr[a]];
+  }
+}
