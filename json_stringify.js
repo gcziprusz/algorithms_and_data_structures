@@ -54,3 +54,66 @@ function stringify(data) {
     return `{${arr.join(',')}}`;
   }
 }
+
+
+// Cleaner but WIP 10001 edge cases are frustrating
+function stringify(data) {
+  switch (getType(data)) {
+    case "boolean":
+    case "number":
+      return `${data}`
+    case "date":
+      return `"${data.toISOString()}"`
+    case "string":
+      return `"${data}"`
+    case "undefined":
+      return;
+    case "symbol":
+    case "null":
+    case "nan":
+    case "infinity":
+      return 'null';
+    case "function":
+      return undefined;
+    case "bigint":
+     throw new Error("can't serialize bigint");
+    case "array":
+      const array = data.map(d=> getType(d) === 'symbol'? 'null':d).map((el) => el !== el ? 'null' : stringify(el));
+      return `[${array.join(',')}]`;
+      // let array = data.filter(d=> d === undefined).map(d=> ['symbol'].includes(getType(d) ? 'null':stringify(d)))
+      // return `[${ array.join(',')}]`;
+    case "object":
+    case "map":
+      let arr = Object.entries(data).reduce((acc,[k,v]) => {
+          return acc.concat(`"${k}":${stringify(v)}`);
+      },[]);
+      return `{${arr.join(',')}}`;
+  }
+
+  // boolean  ok 
+  // date     ok iso string 
+  // number   ok 
+  // string   ok  
+
+  // symbol      null
+  // undefined   null
+  // null       null 
+  
+  // +-Infinity. null
+  // function    null
+  // bigint      throws 
+  // circular structure to throws 
+
+  // object -> composite of other types ...break down 
+  // Array -> composite of other types ...break down 
+  // Map, Set, WeakMap, and WeakSet ...break down
+}
+function getType(data){
+  if(typeof data === Symbol) return 'symbol'
+  if(Math.abs(data) === Infinity) return 'infinity' 
+  if(data !== data) return 'nan'
+  if(data instanceof Map) return 'map'
+  // [object Number] > number 
+  
+  return Object.prototype.toString.call(data).slice(1,-1).split(" ")[1].toLowerCase();
+}
