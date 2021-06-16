@@ -10,3 +10,17 @@ function sort(items, newOrder) {
      }
    }
 }
+
+
+/*single loop alternative O(1) space*/
+function sort(items, newOrder) {
+  let i=0;
+  while (i<items.length) {
+    if (i!=newOrder[i]) {
+      let newIndex = newOrder[i]; 
+      [items[i], items[newIndex]] = [items[newIndex], items[i]];
+      [newOrder[i], newOrder[newIndex]] = [newOrder[newIndex], newOrder[i]];
+    }
+    i++;
+  }
+}
