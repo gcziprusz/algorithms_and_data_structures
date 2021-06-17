@@ -1,14 +1,9 @@
 function get(source, path, defaultValue = undefined) {
-  // your code here
-  if( !path.length) return undefined;
-  
-  let props = Array.isArray( path ) ? path :
-    path.split(/\.|\[|\]/g);
-  
-  props = !props[props.length - 1] ? props.slice(0,-1) : props;
-  
-  
-  return props.reduce((result,curr,i) => {
+  if (!path.length) return defaultValue;
+  let keys = Array.isArray(path) ? path : path.split(/[.\[\]]/g).filter(Boolean);
+ 
+
+  return keys.reduce((result,curr) => {
     return result[curr] || defaultValue
   }, source)
 }
