@@ -1,4 +1,4 @@
-function completeAssign(target, ...sources) {
+function objectAssign(target, ...sources) {
   if (target === undefined || target === null) throw 'err'
   target = Object(target)
   sources.filter(source => !!source).forEach(source => {
