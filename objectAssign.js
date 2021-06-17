@@ -1,12 +1,7 @@
-function objectAssign(target, ...sources) {
-  if (target === undefined || target === null) {
-    throw 'err'
-  }
+function completeAssign(target, ...sources) {
+  if (target === undefined || target === null) throw 'err'
   target = Object(target)
-  sources.forEach(source => {
-    if (source === undefined || source === null) {
-      return
-    }
+  sources.filter(source => !!source).forEach(source => {
     Object.defineProperties(
       target,
       Object.getOwnPropertyDescriptors(source)
