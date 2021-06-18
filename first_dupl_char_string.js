@@ -10,16 +10,12 @@ function firstDuplicate(str) {
 }
 
 
+
+// O(1) space using lastIndexOf
 function firstDuplicate(str) {
-  // your code here
-
-  let duplicate = '';
-  for (var i = 0; i < str.length; i++) {
-    if (i !== str.lastIndexOf(str[i])) {
-      duplicate = str[i];
-      break;
-    }
+  for(let i = 0; i< str.length;i++){
+    let lastI = str.lastIndexOf(str[i]);
+    if(i!== lastI) return str[i]
   }
-
-  return duplicate.length > 0 ? duplicate : null
+  return null;
 }
