@@ -23,17 +23,15 @@ first((error, data) => {
 
 /** WITH PROMISE **/
 function race(funcs){
-    return (callback) => {
-      (new Promise((resolve) => {
-          funcs.map((func) => {
+    return function(callback) {
+      (new Promise(resolve => {
+        funcs.map(func => {
               func((a,b) => {
                 resolve({a,b});
               })
           })
-      })).then(({a,b}) => {
-          callback(a || undefined, b || undefined);
-      });
-  }
+      })).then(({a,b}) => {callback(a,b)})
+    }
 }
 
 /*NO PROMISE */
