@@ -34,3 +34,18 @@ function hasCircle(head) {
 
   return false
 }
+
+
+/* store visited property with nodes*/
+function hasCircle(head) {
+  let hasCircle = false;
+  while(head !== null) {
+    head.visited = true;
+    if(head.next && head.next.visited) {
+      hasCircle = true;
+      break;
+    }
+    head = head.next;
+  }
+  return hasCircle;
+}
