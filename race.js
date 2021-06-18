@@ -48,3 +48,17 @@ function race(funcs){
     });
   };
 }
+
+
+/*RACE WITH PROMISE INPUT*/
+function race(promises) {
+  return new Promise((resolve, reject) => {
+    for (let promise of promises) {
+      promise.then((r) => {
+        resolve(r)
+      }).catch((e) => {
+        reject(e)
+      })
+    }
+  })
+}
