@@ -15,3 +15,23 @@ function myExpect(input: any): Matcher & { not: Matcher } {
     }
   }
 }
+
+
+// USING DEFINE PROPERTY
+function myExpect(input) {
+  let reverse = false;
+  return Object.defineProperty({
+    toBe(value){
+      let match = Object.is(value,input);
+      if(reverse && match || !reverse && !match){
+        throw new Error('no match')
+      }
+    }
+  },
+  'not', {
+      get(){
+        reverse = !reverse;
+        return this;
+      }
+    })
+}
