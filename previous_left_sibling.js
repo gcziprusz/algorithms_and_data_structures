@@ -1,14 +1,13 @@
-// BFS 
+// BFS
 function previousLeftSibling(root, target) {
-  const q = [root];
-  while (q.length) {
-    const n = q.length;
-    let prev = null;
-    for (let i=0; i<n; i++) {
-      const curr = q.shift();
-      if (curr === target) return prev;
-      q.push(...curr.children);
-      prev = curr;
+  const queue = [root];
+  while (queue.length) {
+    let size = queue.length;
+    while (size > 0) {
+      const pop = queue.pop();
+      if (pop === target) return queue.length === 0 ? null : queue.pop();
+      queue.unshift(...pop.children);
+      size -= 1;
     }
   }
   return null;
