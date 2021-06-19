@@ -1,5 +1,5 @@
-function fib(n, result1 = 1, result2 = 1){
-  if (n === 0) return 0
-  if (n <= 2) return result2
-  return fib(n - 1, result2, result1 + result2)
+function fib(n, a = 0, b = 1){
+  if (n === 0) return a;
+  if (n === 1) return b;
+  return fib(n - 1, b, a + b);
 }
