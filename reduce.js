@@ -1,12 +1,11 @@
-Array.prototype.myReduce = function (callback, initial) {
-  let accumulation = arguments.length > 1 ? initial : this[0];
-  let i = arguments.length > 1 ? 0 : 1;
+Array.prototype.myReduce = function (...args) {
+  let hasInitialValue = args.length >1;  
+  if(!hasInitialValue && this.length ===0) throw new Error();
 
-  if (!this.length && arguments.length < 2) throw TypeError();
-
-  for (; i < this.length; i ++) {
-    accumulation = callback(accumulation, this[i], i, this);
+  let result = hasInitialValue ? args[1] : this[0];
+  let i = hasInitialValue ? 0:1;
+  for(;i<this.length;i++){
+    result = args[0](result,this[i],i,this);
   }
-
-  return accumulation
+  return result;
 }
