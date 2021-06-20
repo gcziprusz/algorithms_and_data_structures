@@ -1,15 +1,20 @@
+//           360deg
+//             12
+//          11 |  1   30deg
+//         10  |   2  60deg
+// 270deg 9 <<<|--- 3  90deg
+//         8       4  120deg
+//           7   5  150deg
+//             6 
+//           180deg     
 function angle(time) {
-  // your code here
-  const [hour, min] = time.split(':').map((seg) => parseInt(seg, 10))
+  let parts = time.split(":").map(p => parseInt(p,10))
   
-  const h = (hour >= 12 ? hour - 12 : hour)
-  const m = min
+  let h = parts[0] >= 12 ? parts[0]-12:parts[0];
+  let m = parts[1];
+  let mAngle = (m/60)*360;
+  let hAngle = (h/12)*360 + mAngle/12
 
-  const angleMin = (m / 60) * 360
-  const angleHour = (h / 12) * 360 + angleMin / 12
-
-  
-  const angle = Math.abs(angleHour - angleMin)
-  const finalAngle = angle > 180 ? 360 - angle : angle
-  return Math.round(finalAngle)
+  let angle = Math.abs(hAngle-mAngle);
+  return Math.round(angle > 180 ? 360-angle: angle);
 }
