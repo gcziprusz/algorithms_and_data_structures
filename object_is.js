@@ -10,3 +10,17 @@ function is(a, b) {
 
    return a === b;
 }
+
+
+/*alternative with tostring*/
+function is(a, b) {
+  if (typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b)) {
+    return true;
+  }
+ 
+  if (typeof a === 'number' && typeof b === 'number') {
+    return a.toLocaleString() === b.toLocaleString();
+  }
+
+  return a === b;
+}
