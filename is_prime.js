@@ -1,7 +1,17 @@
+// ** naive solution with lots of comparisons O(n)
+function isPrime(num) {
+  if (num < 2) return false
+
+  for(let i = 2; i <=num; i++) {
+    if (num % i === 0) return false
+  }
+
+  return true
+}
+
+//OPTIMIZED/
 function isPrime(num) {
   
-  // Wait! What? We need square root here? 🤔
-  // Yes, I had same question. You may want to check out below link for explanation.
   const squareRootOfNum = Math.floor(Math.sqrt(num));
   
   let prime = num > 1;
