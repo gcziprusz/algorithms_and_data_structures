@@ -12,3 +12,15 @@ async function allSettled(promises) {
   return result
 }
 
+
+/***** REDUCE ****/
+function allSettled(promises) {
+  return promises.reduce((prev, next) => {
+    return prev.then(res => {
+      return !(next instanceof Promise) ? 
+      [...res, {status: 'fulfilled', value: next}] : 
+      next.then(data => [...res, {status: 'fulfilled', value: data}], (err) => Promise.resolve([...res, {status: 'rejected', reason: err}]))
+    })
+  }, Promise.resolve([]))
+}
+
