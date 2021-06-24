@@ -1,3 +1,28 @@
+// Adding props to the function
+function parallel(funcs){
+  return function(finishedCallback){
+    let callback = (index) => (error,data) => {
+      callback.done = callback.done || false
+      callback.completed = callback.completed || 0;
+      callback.res = callback.res || [];
+      if(callback.done) return;
+      if(error) {
+        callback.done = true;
+        finishedCallback(error,undefined)
+      }
+      callback.res[index] = data;
+      callback.completed++
+      if(callback.completed === funcs.length){
+        finishedCallback(undefined,callback.res)
+      }
+    }
+    funcs.forEach((fn,i) => {
+      fn(callback(i));
+    });
+  }
+}
+
+
 function parallel(funcs){
   const result = []
   let completed = 0
