@@ -1,3 +1,22 @@
+
+function allSettled(promises) {
+  return new Promise(resolve => {
+    let res = [],wait = promises.length;
+    if(wait ===0 ) resolve([])
+    promises.forEach((p,i) => {
+       Promise.resolve(p)
+       .then(value=> res[i] = {status:"fulfilled",value})
+       .catch(reason =>  res[i] = {status:"rejected",reason})
+       .finally(()=> {
+         wait--;
+         if(wait ===0) {
+           resolve(res);
+         }
+       })
+     });
+  })
+}
+
 /** with async await **/
 async function allSettled(promises) {
   let result = [];
