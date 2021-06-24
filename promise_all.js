@@ -9,3 +9,12 @@ async function all(promises) {
 }
 
 
+
+
+function all(promises) {  
+  return promises.reduce(
+    (acc,curr)=>
+       acc.then(results => Promise.resolve(curr).then(r=> [...results,r])),
+    Promise.resolve([])
+  )
+}
