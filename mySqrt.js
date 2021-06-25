@@ -1,3 +1,28 @@
+// Recursive Babylonian square-root algorithm
+function mySqrt(x) {
+  if(x == 0 || x == Infinity) return x;
+  if(typeof x != 'number' || x == -Infinity || x < 0 || Number.isNaN(x) ) return NaN;
+  
+  var epsilon = 0.1;
+   function isGoodEnough(est){
+     if(Math.abs(Math.pow(est,2)-x)<epsilon) return true
+     else return false;
+   }
+   function improve(est) {
+    return (est +(x/est)) /2
+   }
+   function iter(est){
+      if(isGoodEnough(est)){
+        return est;
+      } else {
+        return iter(improve(est));
+      }
+   }
+  return Math.trunc(iter(x));
+}
+
+
+
 function mySqrt(x) {
   /** === Using the Babylonian square-root algorithm === */
   // special cases
