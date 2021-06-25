@@ -10,6 +10,15 @@ function pow(base, power){
   return res;
 }
 
+// recursion  with tail call optimization 
+function pow(base, power){
+  // your code here
+  if (power === 0) return 1;
+  if (power === 1) return base;
+  if (power < 0) return pow(1 / base, -power);
+  return base * pow(base, power - 1);
+}
+
 
 // Time complexity: O(logn)
 // The idea is to reduce the power by half at each recursion until power reaches the base cases, 0 and 1.
