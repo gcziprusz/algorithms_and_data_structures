@@ -21,3 +21,19 @@ function extract(str) {
   }
   return res;
 }
+
+function extract(str) {
+  // your code here
+  const result = [];
+  while (true) {
+    const start = str.search(/<a>|<a /);
+    if (start === -1) break;
+    var tempStr = str.slice(start + 2);
+    const end = tempStr.indexOf('a>');
+    const tpl = '<a' + tempStr.slice(0, end + 2);
+    result.push(tpl);
+    str = str.replace(tpl, '');
+  }
+
+  return result;
+}
