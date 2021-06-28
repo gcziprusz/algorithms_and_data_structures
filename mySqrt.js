@@ -39,3 +39,22 @@ function mySqrt(x) {
     lastGuess = guess; // update last guess with guess
   }
 }
+
+
+/* SEARCH METHOD */ 
+function mySqrt(x) {
+  if(isNaN(x) || x < 0) return NaN
+  let left = 1,right = Math.floor(x / 2) + 1,mid = 0;
+  while(left <= right) {
+    mid = Math.floor((left + right) / 2);
+    const tmp = Math.pow(mid, 2);
+     if(tmp > x) {
+       right = mid - 1;
+     } else if(tmp < x) {
+       left = mid + 1;
+     } else {
+       return mid
+     }
+  }
+  return right;  
+}
