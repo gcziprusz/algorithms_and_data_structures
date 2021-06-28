@@ -1,3 +1,22 @@
+function valid(x) {
+  if(isNaN(x) || typeof x !== 'number' || Math.sign(x) === -1) return [false,NaN];
+  else if(x===0 || x ===Infinity) return [false,x];
+  return [true]
+}
+
+function mySqrt(x){
+  let [validX,retValue] = valid(x);
+  if(!validX) return retValue;
+
+  let i =0;
+
+  while(i*i<=x){
+    i +=1;
+  }
+  return i-1;
+}
+
+
 // Simple brute force approach
 function mySqrt(x){
     if(x === NaN || x === Infinity) return x;
