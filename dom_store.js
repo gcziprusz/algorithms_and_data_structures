@@ -1,3 +1,21 @@
+
+class NodeStore {
+  constructor(){
+    this.KEY = Symbol();
+  }
+  set(node, value) {
+    node[this.KEY] = value;
+  }
+  get(node) {
+    if(!node[this.KEY]) return;
+    return node[this.KEY];
+  }
+  has(node) {
+    return node[this.KEY] ? true:false;
+  }
+}
+
+
 /* O(1) version*/
 class NodeStore {
   static VALUE_KEY = '__index'
