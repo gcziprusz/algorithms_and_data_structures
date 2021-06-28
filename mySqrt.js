@@ -1,3 +1,18 @@
+// Simple brute force approach
+function mySqrt(x){
+    if(x === NaN || x === Infinity) return x;
+    if(x===-Infinity || x < 0 || isNaN(x) || typeof x !== 'number' ) return NaN
+
+    let i = 0
+    
+    while (i*i <= x){
+      i += 1;
+    }
+    return i-1
+}
+
+
+
 // Recursive Babylonian square-root algorithm
 function mySqrt(x) {
   if(x == 0 || x == Infinity) return x;
