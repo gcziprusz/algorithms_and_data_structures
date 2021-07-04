@@ -1,7 +1,14 @@
-/**
- * @param {number} num
- * @return {string}
- */
+function addComma(num) {
+  let [integer,fraction] = String(num).split("."),s = '', count = 0;
+
+  for (let i = integer.length - 1; i >= 0; i--) {
+    s = integer[i] + s;
+    if (++count % 3 === 0 && i !== 0) {
+      s = ',' + s
+    }
+  }
+  return !fraction ? s : (s + "." +fraction);
+}
 
 // naive solution
 // function addComma(num) {
