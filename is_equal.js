@@ -1,6 +1,6 @@
 function isEqual(a, b, map = new Map()) {
   if (a === b) return true;
-  if (map.has(a) || map.has(b)) return true;
+  if (map.has(a) && (map.get(a) === b)) return true;
   map.set(a, b);
   if (typeof a === 'object' && typeof b === 'object') {
     const a_keys = Object.keys(a);
