@@ -2,6 +2,7 @@
 function parse(code)  {
   const reg = /^\s*<\s*(\S+)\s*>([^<>]*)<\s*\/\s*(\S+)\s*>\s*$/
   const match = code.match(reg)
+
   if (match) {
     const element = {
       openingElement: {
@@ -26,6 +27,9 @@ function generate(ast) {
   if (children[0]) {
     return `h("${openingElement.tag}", null, "${children[0]}")`
   } else {
-    return `h("${openingElement.tag}", null)`
+    return `h("${closingElement.tag}", null)`
   }
 }
+
+// TODO BETTER REGEX
+console.log(generate(parse('</a><//a>')))
