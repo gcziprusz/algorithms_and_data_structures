@@ -1,3 +1,15 @@
+const UP = -1,DOWN = 1;
+function decode(message) {
+	if(!message.length || !message[0].length) return "";
+	let secret='',COLS = message[0].length,ROWS=message.length,r=0,c=0,dir=DOWN;
+	while(c<COLS&& r>=0&&r<ROWS){
+		secret += message[r][c++];
+		r += dir;
+		dir = (r === ROWS-1 ? UP:DOWN);
+	}
+	return secret;
+}
+
 /**
  * @param { string[][] } message
  * @returns { string }
