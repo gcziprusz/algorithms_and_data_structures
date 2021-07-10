@@ -23,12 +23,12 @@ const reverseLinkedList = (list) => {
 
 
 /**RECURSIVE**/
-const reverseLinkedList = (list, next) => {
-    if (!list) return;
-    const currentNext = list.next;
-    list.next = next;
-    if (currentNext) {
-        return reverseLinkedList(currentNext, list);
+const reverseLinkedList = (curr,prev) => {
+    if(!curr) return;
+    let next = curr.next;
+    curr.next = prev;
+    if(next){
+        return reverseLinkedList(next,curr)
     }
-    return list;
+    return curr;
 }
