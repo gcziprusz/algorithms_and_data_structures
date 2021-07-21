@@ -1,27 +1,27 @@
 var orangesRotting = function (grid) {
-	let minute = 0,totalFreshOranges = 0,rottenOranges = [];
-	for (let i = 0; i < grid.length; i++) {
-		for (let j = 0; j < grid[i].length; j++) {
-			if (grid[i][j] === 1) totalFreshOranges++;
-			if (grid[i][j] === 2) rottenOranges.push([i, j]);
-		}
-	}
-	const m = [[0, -1], [0, 1], [-1, 0], [1, 0],];
-	while (totalFreshOranges && rottenOranges.length) {
-		let rottingOranges = [];
-		while (rottenOranges.length) {
-			let [x, y] = rottenOranges.pop();
-			for (let i = 0; i < 4; i++) {
-				let [x2, y2] = [x + m[i][0], y + m[i][1]];
-				if (grid[x2] && grid[x2][y2] === 1) {
-					grid[x2][y2] = 2;
-					totalFreshOranges--;
-					rottingOranges.push([x2, y2]);
-				}
-			}
-		}
-		rottenOranges = rottingOranges;
-		minute++;
-	}
-	return totalFreshOranges ? -1 : minute;
-};
+    let rotten = [],ROWS=grid.length,COLS=grid[0].length,fresh=0,mins=0;
+    for(let r = 0; r < ROWS;r++){
+        for(let c =0; c< COLS;c++){
+            if(grid[r][c]===2) rotten.push([r,c]);
+            else if (grid[r][c]===1) fresh++;
+        }
+    }
+    
+    while(fresh && rotten.length){
+        let rotting =[];
+        while(rotten.length){
+            let [x,y] = rotten.pop();
+            for(let [x1,y1] of [[0,1],[0,-1],[1,0],[-1,0]]){
+                x1+=x,y1+=y;
+                if(grid[x1] && grid[x1][y1] ===1) {
+                    grid[x1][y1] =2;
+                    fresh--;
+                    rotting.push([x1,y1]);
+                }
+            }
+        }
+        rotten = rotting;
+        mins++;
+    }
+    return  fresh > 0 ? -1 : mins;
+}
