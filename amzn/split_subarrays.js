@@ -23,7 +23,7 @@ function count(arr) {
     let left = 0,right = 0,count = 0;
     
     for (let el of arr) {
-        leftSum += el;
+        left += el;
     }
     
     for (let i = arr.length - 1; i >= 0; i--) {
