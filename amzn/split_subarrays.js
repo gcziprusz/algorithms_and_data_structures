@@ -20,7 +20,7 @@
 
 function count(arr) {
     if (arr.length < 2 ) return;
-    int left = 0,right = 0,count = 0;
+    let left = 0,right = 0,count = 0;
     
     for (let el of arr) {
         leftSum += el;
