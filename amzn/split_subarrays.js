@@ -20,7 +20,7 @@
 
 function count(arr) {
     if (arr.length < 2 ) return;
-    int left = 0,rightSum = 0,count = 0;
+    int left = 0,right = 0,count = 0;
     
     for (let el of arr) {
         leftSum += el;
@@ -30,7 +30,7 @@ function count(arr) {
         right+= arr[i];
         left -= arr[i];
         
-        if (rightSum < leftSum && (rightSum !== 0 && leftSum !== 0)) {
+        if (right < left && (right !== 0 && left !== 0)) {
             count++;
         }
     }
