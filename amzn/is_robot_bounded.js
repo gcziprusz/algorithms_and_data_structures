@@ -48,5 +48,5 @@ var isRobotBounded = function(instructions) {
             y += dy;
         }
     }
-    return (!x && !y) || dy !== 1;
+   return (x===0 && y===0) || dy !== 1|| dx !==0
 };
