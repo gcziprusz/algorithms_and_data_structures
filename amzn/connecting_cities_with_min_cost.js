@@ -2,36 +2,37 @@
 // Introduction to Union Find https://www.youtube.com/watch?v=0jNmHPfA_yE
 // Introduction to Union Find Path Compression https://www.youtube.com/watch?v=VHRhJWacxis
 
-function minimumCost(N, connections) {
-  let n = N;
-
-  const parents = [];
-  for (let i = 0; i < N; i++) parents.push(i);
-
-  function union(u, v) {
-    const p1 = find(u);
-    const p2 = find(v);
-
-    if (p1 !== p2) {
-      parents[p1] = p2;
-      n--;
+ class UnionFind {
+        constructor(rows) {
+            this.graph = [...Array(rows).keys()];
+            this.groups = rows;
+        }
+        find(id){
+            // while(id !== this.graph[id]) id = this.graph[id];
+            // return id;
+            if (id === this.graph[id]) return id;
+            return this.graph[id] = this.find(this.graph[id]); // path compression
+        }
+        union(x, y) {
+            const rootX = this.find(x);
+            const rootY = this.find(y);
+            if(rootX !== rootY) {
+                this.graph[rootY] = rootX;
+                this.groups--;
+            }
+        }
     }
-  }
 
-  // Find root
-  function find(u) {
-    if (u === parents[u]) return u;
-    return parents[u] = find(parents[u]); // path compression
-  }
-
+function minimumCost(N, connections) {
   connections.sort((a, b) => a[2] - b[2]);
 
-  let res = 0;
+  let res = 0,unionFinder = new UnionFind(N);
   for (const [u, v, cost] of connections) {
-    if (find(u) !== find(v)) {
+    
+    if (unionFinder.find(u) !== unionFinder.find(v)) {
       res += cost;
-      union(u, v);
+      unionFinder.union(u, v);
     }
   }
-  return n === 1 ? res : -1;
+  return unionFinder.groups === 1 ? res : -1;
 }
