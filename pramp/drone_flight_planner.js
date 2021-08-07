@@ -38,4 +38,20 @@ function calcDroneMinEnergy(route){
 }
 calcDroneMinEnergy([[0,2,6],[10,10,20]])
 
-// ELEGANT
+/* ELEGANT
+The more elegant solution
+This solution is based on one observation: the initial energy level is what it takes the drone to climb from the start point to the highest (max) point in its route.
+
+Getting to any altitude below the starting altitude produces energy, and going above it consumes at most the difference between the max altitude and the starting altitude.
+
+Even if we descend before climbing to the max altitude, by ascending back to the same altitude as the starting altitude, our balance is zero and we then need more energy to climb from the starting altitude to the max altitude.
+
+Pseudocode:*/
+
+function calcDroneMinEnergy(route){
+   let maxHeight = route[0][2]
+   for(let i = 1;i< route.length;i++){
+       if (route[i][2] > maxHeight) maxHeight = route[i][2]
+   }
+   return maxHeight - route[0][2]
+}
