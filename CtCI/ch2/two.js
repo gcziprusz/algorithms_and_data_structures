@@ -1,8 +1,7 @@
-// https://leetcode.com/problems/remove-duplicates-from-an-unsorted-linked-list/submissions/
+// https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 // 1836. Remove Duplicates From an Unsorted Linked List
 
 /**
-
  * Definition for singly-linked list.
  * function ListNode(val, next) {
  *     this.val = (val===undefined ? 0 : val)
@@ -11,39 +10,21 @@
  */
 /**
  * @param {ListNode} head
+ * @param {number} n
  * @return {ListNode}
  */
-var deleteDuplicatesUnsorted = function(head) {
-  let histo = new Map();
-  let c = head;
-  while(c){
-      histo.set(c.val, (histo.get(c.val)||0)+1);
-      c = c.next;
-  }
-  let tmp = new ListNode(0,head);
-  c = tmp;
-  while(c){
-      while(c.next && histo.get(c.next.val) >1){
-        c.next = c.next.next
-      }
-    c = c.next;
-  }
-  return tmp.next;  
+var removeNthFromEnd = function(head, n) {
+    let d = new ListNode(0);
+    d.next=head;
+    
+    let left=d;
+    let right=d;
+    for (let i =1;i <= n+1;i++) right = right.next;
+    
+    while(right) {
+        right = right.next;
+        left =left.next;
+    }
+    left.next = left.next.next;
+    return d.next;
 };
-
-
-//       c
-//       |
-//       v
-// -->  head
-// |     |
-// |     v     
-// |   [v:1,next:3] -|  [v:2,next:3]  ->   [v:3,next:2]   ->    [v:2,next:null]
-// |            |________________________^
-// |       c
-// |       |
-// |       v
-// |     tmp
-// |      |
-// |      v     
-// - [v:0,next:1]
