@@ -1,16 +1,14 @@
 # https://leetcode.com/problems/majority-element/?envType=study-plan-v2&envId=top-interview-150
+# * Time Complexity: 0(N)
+# * Space Complexity: 0(N)
+# https://www.youtube.com/watch?v=7pnhv842keE
+
 class Solution(object):
     def majorityElement(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        # figure out what number constitutes majority n/2 
-        # create a map 
-        # occurence -> num
-        # 1 -> number needed for majority
-        # every time I encouter it I decrement it by one 
-        # if I see 1 for given number and I am about to do an update I found the soln
         l = len(nums)
         if l < 2: return nums[0]
         
@@ -25,3 +23,23 @@ class Solution(object):
                 return n
             else:
                 dict[n] = dict[n] -1
+# * Time Complexity: 0(N)
+# * Space Complexity: 0(1)
+# Use Boyer-Moore Voting Algorithm
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        cnt = 0
+        el = None
+        for n in nums:
+            if cnt == 0:
+                el = n
+                cnt += 1
+            elif n == el:
+                cnt += 1
+            else:
+                cnt -= 1
+        return el
