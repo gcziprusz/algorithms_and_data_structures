@@ -6,11 +6,6 @@
 
 class Solution(object):
     def rotate(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: None Do not return anything, modify nums in-place instead.
-        """
         l = len(nums)
         numc = [0] * l
         for i in range(l):
@@ -19,3 +14,22 @@ class Solution(object):
             numc[ir] = nums[i]
         for i in range(l):
             nums[i] = numc[i]
+
+# * Time Complexity: 0(N)
+# * Space Complexity: 0(1)
+
+class Solution(object):
+    def reverse(self,nums, i,j):
+        l = i
+        r = j
+        while l < r:
+            nums[l],nums[r] = nums[r],nums[l]
+            l +=1
+            r -=1
+    def rotate(self, nums, k):
+        l =len(nums)
+        k = k % l
+        self.reverse(nums,0,l-k-1)
+        self.reverse(nums,l-k,l-1)
+        self.reverse(nums,0,l-1)
+
