@@ -32,4 +32,3 @@ class Solution(object):
         self.reverse(nums,0,l-k-1)
         self.reverse(nums,l-k,l-1)
         self.reverse(nums,0,l-1)
-
