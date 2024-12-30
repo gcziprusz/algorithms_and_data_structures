@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/product-of-array-except-self/?envType=study-plan-v2&envId=top-interview-150
 
+# Runtime O(n)
+# Space O(n)
 class Solution(object):
     def productExceptSelf(self, nums):
         l = len(nums)
