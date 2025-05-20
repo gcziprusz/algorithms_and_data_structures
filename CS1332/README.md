@@ -4,3 +4,5 @@ Source > https://gatech.instructure.com/courses/463338/pages/exploratory-lab-mod
 ## Patterned Rectangular Tilings
 ## Increasing Subsequences in Arrays
 ## Tower of Hanoi
+## Computing Powers Example (Recursive)
+## Recursive Squaring Method
