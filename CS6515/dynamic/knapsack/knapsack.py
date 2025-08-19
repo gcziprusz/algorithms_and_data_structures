@@ -17,9 +17,11 @@ class Solution:
         
         for i in range(1, l+1):
             for w in range(capacity +1):
+                print("i, w, weights[i-1]",i, w, weights[i-1],w)
                 if weights[i-1] > w:
                     dp[i][w] = dp[i-1][w]
                 else:
+                    print("else",w - weights[i-1],dp[i-1][w - weights[i-1]])
                     dp[i][w] = max(dp[i-1][w],values[i-1]+ dp[i-1][w - weights[i-1]])
         
         return dp[l][capacity]
@@ -27,11 +29,14 @@ class Solution:
 
 # Driver Code Starts
 if __name__ == '__main__':
-    test_cases = int(input())
-    for _ in range(test_cases):
-        capacity = int(input())
-        values = list(map(int, input().strip().split()))
-        weights = list(map(int, input().strip().split()))
+    # test_cases = int(input())
+    # for _ in range(test_cases):
+        # capacity = int(input())
+        # values = list(map(int, input().strip().split()))
+        # weights = list(map(int, input().strip().split()))
+        capacity = 4
+        values = [1,2,3]
+        weights = [4,5,1]
         ob = Solution()
         print(ob.knapsack(capacity, values, weights))
         print("~")
